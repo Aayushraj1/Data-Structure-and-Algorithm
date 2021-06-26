@@ -1,0 +1,31 @@
+GFG: https://practice.geeksforgeeks.org/problems/depth-first-traversal-for-a-graph/1#
+
+Given a connected undirected graph. Perform a Depth First Traversal of the graph.
+Note: Use recursive approach to find the DFS traversal of the graph starting from
+      the 0th vertex from left to right according to the graph..
+
+#MY_CODE#
+
+class Solution
+{
+    //Function to return a list containing the DFS traversal of the graph.
+    static ArrayList<Integer> al;
+    public ArrayList<Integer> dfsOfGraph(int V, ArrayList<ArrayList<Integer>> adj)
+    {
+        al = new ArrayList<Integer>();
+        boolean visited[] = new boolean[V];
+        solve(0,visited,adj);
+        return al;
+    }
+    
+    public static void solve(int source,boolean visited[],ArrayList<ArrayList<Integer>> adj)
+    {
+        al.add(source);
+        visited[source] = true;
+        for(int neighbour : adj.get(source))
+        {
+            if(!visited[neighbour])
+                solve(neighbour,visited,adj);
+        }
+    }
+}
