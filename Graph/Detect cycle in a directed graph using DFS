@@ -1,0 +1,52 @@
+GFG: https://practice.geeksforgeeks.org/problems/detect-cycle-in-a-directed-graph/1
+
+Given a Directed Graph with V vertices (Numbered from 0 to V-1) and E edges, 
+check whether it contains any cycle or not.
+
+#MY_CODE#
+
+class Solution 
+{
+    //Function to detect cycle in a directed graph.
+    public boolean isCyclic(int V, ArrayList<ArrayList<Integer>> adj)
+    {
+        boolean visited[] = new boolean[V];
+        boolean direct_visited[] = new boolean[V];
+        
+        for(int i=0;i<V;i++)
+        {
+            if(!visited[i])
+            {
+                if(cycle(i,visited,direct_visited,adj))
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
+    public static boolean cycle(int source,boolean visited[],boolean direct_visited[],ArrayList<ArrayList<Integer>> adj)
+    {
+        visited[source] = true;
+        direct_visited[source] = true;
+        
+        for(int neighbour : adj.get(source))
+        {
+            if(!visited[neighbour])
+            {
+               
+               if(cycle(neighbour,visited,direct_visited,adj))
+               {
+                   return true;
+               }
+            }
+            else if(direct_visited[neighbour] == true)
+            {
+                return true;
+            }
+        }
+        direct_visited[source] = false;
+     return false;   
+    }
+}
