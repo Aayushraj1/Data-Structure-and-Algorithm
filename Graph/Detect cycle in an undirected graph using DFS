@@ -1,0 +1,47 @@
+GFG: https://practice.geeksforgeeks.org/problems/detect-cycle-in-an-undirected-graph/1
+
+Given an undirected graph with V vertices and E edges, check whether it contains any cycle or not. 
+
+#MY_CODE#
+
+class Solution
+{
+    public boolean isCycle(int V, ArrayList<ArrayList<Integer>> adj)
+    {
+       boolean visited[] = new boolean[V];
+       int parent[] = new int[V];
+       Arrays.fill(parent,-1);
+        
+       
+            for(int j=0;j<V;j++)
+            {
+                if(!visited[j])
+                {
+                    if(cycle(j,visited,parent,adj))
+                   return true;
+                }
+            }
+       
+       return false;
+    }
+    
+    public static boolean cycle(int source,boolean visited[],int parent[],ArrayList<ArrayList<Integer>> adj)
+    {
+       visited[source] = true;
+       
+       for(int neighbour : adj.get(source))
+       {
+           if(!visited[neighbour])
+           {
+              parent[neighbour] = source; 
+              if(cycle(neighbour,visited,parent,adj))
+                  return true;
+           }
+           else if(parent[source] != neighbour)
+           {
+               return true;
+           }
+       }
+       return false;
+    }
+}
