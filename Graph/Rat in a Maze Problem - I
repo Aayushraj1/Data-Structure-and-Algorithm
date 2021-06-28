@@ -1,0 +1,58 @@
+GFG: https://practice.geeksforgeeks.org/problems/rat-in-a-maze-problem/1#
+
+Consider a rat placed at (0, 0) in a square matrix of order N * N. It has to 
+reach the destination at (N - 1, N - 1). Find all possible paths that the rat 
+can take to reach from source to destination. The directions in which the rat 
+can move are 'U'(up), 'D'(down), 'L' (left), 'R' (right). Value 0 at a cell in 
+the matrix represents that it is blocked and rat cannot move to it while value 1 
+at a cell in the matrix represents that rat can be travel through it.
+
+Input:
+N = 4
+m[][] = {{1, 0, 0, 0},
+         {1, 1, 0, 1}, 
+         {1, 1, 0, 0},
+         {0, 1, 1, 1}}
+Output:
+DDRDRR DRDDRR
+
+#MY_CODE#
+
+class Solution {
+    static ArrayList<String> al;
+    public static ArrayList<String> findPath(int[][] m, int n) {
+        al = new ArrayList<>();
+        int visited[][] = new int[n][n];
+        if(m[0][0] == 0 || m[n-1][n-1] == 0)
+            return al;
+            
+        String dir = "";
+        
+        dfs(0,0,n,m,visited,dir);
+        
+        Collections.sort(al);
+        return al;
+    }
+    
+    public static void dfs(int i,int j,int n,int m[][],int visited[][],String dir)
+    {
+        if(i<0 || j<0 || i>=n || j>=n)
+            return;
+        if(m[i][j] == 0 || visited[i][j] == 1)
+            return;
+        if(i==(n-1) && j==(n-1))
+            {
+                al.add(dir);
+                return;
+            }
+            
+        visited[i][j] = 1;
+        
+        dfs(i+1,j,n,m,visited,dir+'D');
+        dfs(i,j-1,n,m,visited,dir+'L');
+        dfs(i,j+1,n,m,visited,dir+'R');
+        dfs(i-1,j,n,m,visited,dir+'U');
+        
+        visited[i][j] = 0;
+    }
+}
