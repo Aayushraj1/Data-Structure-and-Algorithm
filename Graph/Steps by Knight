@@ -1,0 +1,71 @@
+GFG: https://practice.geeksforgeeks.org/problems/steps-by-knight5927/1#
+
+Given a square chessboard, the initial position of Knight and position of a target.
+Find out the minimum steps a Knight will take to reach the target position.
+
+Note:
+The initial and the target position co-ordinates of Knight have been given accoring to 1-base indexing.
+
+#MY_CODE#
+
+class Solution
+{
+    class Node 
+    {
+        int i;
+        int j;
+        int steps;
+        Node (int i, int j, int steps)
+        {
+            this.i = i;
+            this.j = j;
+            this.steps = steps;
+        }
+    }
+    
+
+    //Function to find out minimum steps Knight needs to reach target position.
+    public int minStepToReachTarget(int KnightPos[], int TargetPos[], int N)
+    {
+        int x1 = KnightPos[0]-1;
+        int y1 = KnightPos[1]-1;
+        int x2 = TargetPos[0]-1;
+        int y2 = TargetPos[1]-1;
+        
+        if(x1==x2 && y1==y2)
+            return 0;
+        
+        int rowIndexes[] = { -2, -1, 1, 2, 2, 1, -1, -2 };
+        int colIndexes[] = { 1, 2, 2, 1, -1, -2, -2, -1};
+        
+        boolean visited[][] = new boolean[N][N];
+        Queue<Node> queue = new LinkedList<>();
+        
+        queue.add(new Node(x1,y1,0));
+        
+        int ans = -1;
+        
+        while(!queue.isEmpty())
+        {
+            Node node = queue.poll();
+            if(visited[node.i][node.j] == true)
+                continue;
+            if(node.i == x2 && node.j==y2)
+                return node.steps;
+            visited[node.i][node.j] = true;
+            
+            for(int s=0;s<8;s++)
+            {
+                int x3 = node.i + rowIndexes[s];
+                int y3 = node.j + colIndexes[s];
+               
+                if(x3<0 || y3<0 || x3>=N || y3>=N)
+                    continue;
+                
+                queue.add(new Node(x3,y3,node.steps+1));
+            }
+        }
+        
+        return ans;
+    }
+}
