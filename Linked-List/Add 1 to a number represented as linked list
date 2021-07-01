@@ -1,0 +1,56 @@
+GFG: https://practice.geeksforgeeks.org/problems/add-1-to-a-number-represented-as-linked-list/1#
+
+A number N is represented in Linked List such that each digit corresponds to a node in linked list. You need to add 1 to it.
+
+Example 1:
+Input:
+LinkedList: 4->5->6
+Output: 457
+
+#MY_CODE#
+
+class Solution
+{
+    public static Node addOne(Node head) 
+    { 
+      Node curr = reverse(head);
+      Node newhead = curr;
+      while(curr!=null)
+      {
+         if(curr.next==null & curr.data==9)
+         {
+             curr.data = 0;
+             Node newnode = new Node(1);
+             curr.next = newnode;
+             break;
+         }
+         else if(curr.data==9)
+         {
+            curr.data = 0;
+         }
+         else
+         {
+            curr.data = curr.data+1;
+            break;
+         }
+         curr = curr.next;
+      }
+              
+      return reverse(newhead);
+    }
+    
+    public static Node reverse(Node head)
+    {
+        Node curr = head;
+        Node nxt = null;
+        Node prev = null;
+        while(curr!=null)
+        {
+           nxt = curr.next;
+           curr.next = prev;
+           prev = curr;
+           curr = nxt;
+        }
+        return prev;
+    }
+}
