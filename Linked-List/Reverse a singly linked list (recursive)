@@ -1,0 +1,27 @@
+GFG: https://practice.geeksforgeeks.org/problems/reverse-a-linked-list/1#
+
+Given a linked list of N nodes. The task is to reverse this list.
+
+#MY_CODE#
+
+class Solution
+{
+    //Function to reverse a linked list.
+    Node reverseList(Node head)
+    {
+       Node prev = null;
+       Node curr = head;
+       return reverse(curr,prev);
+    }
+    
+    public static Node reverse(Node curr, Node prev)
+    {
+        if(curr==null)
+        {
+            return prev;
+        }
+        Node nxt = curr.next;
+        curr.next = prev;
+        return reverse(nxt,curr);
+    }
+}
