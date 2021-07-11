@@ -1,0 +1,75 @@
+GFG: https://practice.geeksforgeeks.org/problems/add-two-numbers-represented-by-linked-lists/1#
+
+Given two numbers represented by two linked lists of size N and M. The task is to return a sum list. 
+The sum list is a linked list representation of the addition of two input numbers from the last.
+
+Example 1:
+
+Input:
+N = 2
+valueN[] = {4,5}
+M = 3
+valueM[] = {3,4,5}
+Output: 3 9 0  
+
+#MY_CODE#
+
+class Solution{
+    //Function to add two numbers represented by linked list.
+    static Node addTwoLists(Node first, Node second){
+        Node first_new = reverse(first);
+        Node sec_new = reverse(second);
+        
+        Node first_curr = first_new;
+        Node sec_curr = sec_new;
+        
+        Node new_list = null;;
+        Node curr = null;
+        int carry = 0;
+        int sum = 0;
+        
+        while(first_curr!=null || sec_curr!=null)
+        {
+            sum = (first_curr!=null?first_curr.data:0) + (sec_curr!=null?sec_curr.data:0) + carry;
+            carry = sum/10;
+            sum = sum%10;
+            
+            Node newnode = new Node(sum);
+        
+            if(new_list == null)
+                new_list = newnode;
+            else
+                curr.next = newnode;
+            
+            curr = newnode;
+            if(first_curr != null)
+                first_curr = first_curr.next;
+            if(sec_curr != null)
+                sec_curr = sec_curr.next;
+        }
+        
+        if(carry>0)
+        {
+            Node newnode = new Node(carry);
+            curr.next = newnode;
+            curr = newnode;
+        }
+        
+        return new_list = reverse(new_list);
+    }
+    
+    public static Node reverse(Node head)
+    {
+        Node curr = head;
+        Node prev = null;
+        Node nxt = null;
+        while(curr!=null)
+        {
+            nxt = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = nxt;
+        }
+        return prev;
+    }
+}
