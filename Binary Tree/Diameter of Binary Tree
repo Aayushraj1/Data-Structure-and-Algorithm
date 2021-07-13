@@ -1,0 +1,33 @@
+GFG: https://practice.geeksforgeeks.org/problems/diameter-of-binary-tree/1#
+
+Given a Binary Tree, find diameter of it.
+The diameter of a tree is the number of nodes on the longest path between two end nodes in the tree.
+
+#MY_CODE#
+
+class Solution {
+    // Function to return the diameter of a Binary Tree.
+    int ma;
+    int diameter(Node root) {
+        if(root == null)
+            return 0;
+        ma = Integer.MIN_VALUE;
+        
+        find(root);
+        return ma;
+    }
+    
+    int find(Node root)
+    {
+        if(root==null)
+            return 0;
+            
+        int left = find(root.left);
+        int right = find(root.right);
+        
+        ma = Math.max(ma,left+right+1);
+        
+        return Math.max(left,right)+1;
+    }
+    
+}
