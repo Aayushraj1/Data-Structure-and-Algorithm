@@ -1,0 +1,26 @@
+GFG: https://practice.geeksforgeeks.org/problems/height-of-binary-tree/1#
+
+#MY_CODE#
+
+class Solution {
+    //Function to find the height of a binary tree.
+    int height(Node node) 
+    {
+        if(node == null)
+            return 0;
+            
+        int h = find(node);
+        return h;
+    }
+    
+    int find(Node node)
+    {
+        if(node == null)
+            return 0;
+        
+        int left = find(node.left);
+        int right = find(node.right);
+        
+        return (left>right?left:right)+1;
+    }
+}
