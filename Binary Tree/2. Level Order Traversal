@@ -27,3 +27,38 @@ class Solution
         return al;
     }
 }
+
+======================================================================================================================
+Leetcode(102) : https://practice.geeksforgeeks.org/problems/level-order-traversal/1#
+
+#MY_CODE#
+
+class Solution {
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> list = new LinkedList<List<Integer>>();
+        Queue<TreeNode> queue = new LinkedList<>();
+        
+        if(root==null)
+            return list;
+        
+        queue.add(root);
+        
+        while(!queue.isEmpty())
+        {
+            int levelNum = queue.size();
+            List<Integer> sublist = new LinkedList<>();
+            
+            for(int i=0;i<levelNum;i++)
+            {
+                TreeNode curr = queue.peek();
+                if(curr.left!=null)
+                    queue.add(curr.left);
+                if(curr.right!=null)
+                    queue.add(curr.right);
+                sublist.add(queue.poll().val);                
+            }
+            list.add(sublist);
+        }
+        return list;
+    }
+}
