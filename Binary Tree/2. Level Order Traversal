@@ -1,0 +1,29 @@
+GFG: https://practice.geeksforgeeks.org/problems/level-order-traversal/1
+
+Given a binary tree, find its level order traversal.
+Level order traversal of a tree is breadth-first traversal for the tree.
+
+#MY_CODE#
+
+class Solution
+{
+    //Function to return the level order traversal of a tree.
+    static ArrayList <Integer> levelOrder(Node node) 
+    {
+        ArrayList<Integer> al = new ArrayList<>();
+        Queue<Node> queue = new LinkedList<>();
+        
+        queue.add(node);
+        
+        while(!queue.isEmpty())
+        {
+            Node curr = queue.poll();
+            al.add(curr.data);
+            if(curr.left!=null)
+                queue.add(curr.left);
+            if(curr.right!=null)
+                queue.add(curr.right);
+        }
+        return al;
+    }
+}
