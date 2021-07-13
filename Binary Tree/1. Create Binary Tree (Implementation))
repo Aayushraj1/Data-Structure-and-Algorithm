@@ -1,0 +1,46 @@
+#MY_CODE#
+
+import java.util.*;
+
+class Node
+{
+	int data;
+	Node left,right;
+	Node(int data)
+	{
+		this.data = data;
+		left = null;
+		right = null;
+	}
+}
+
+public class Tree {
+	static Scanner sc = null;
+
+	static Node createTree()
+	{
+		Node root = null;
+		System.out.println("enter data or -1 for null");
+		int data = sc.nextInt();
+		
+		if(data == -1)
+			return null;
+		
+		root = new Node(data);
+		
+		System.out.println("enter left data for " +data);
+		root.left = createTree();
+		
+		System.out.println("enter right data for " +data);
+		root.right = createTree();
+		
+		return root;
+	}
+	
+	public static void main(String args[])
+	{
+		sc = new Scanner(System.in);
+		Node root = createTree();
+	}
+	
+}
