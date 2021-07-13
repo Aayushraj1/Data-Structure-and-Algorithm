@@ -1,0 +1,39 @@
+GFG: https://practice.geeksforgeeks.org/problems/reverse-level-order-traversal/1#
+
+Given a binary tree of size N, find its reverse level order traversal.
+ie- the traversal must begin from the last level. 
+
+#MY_CODE#
+
+class Tree
+{
+    public ArrayList<Integer> reverseLevelOrder(Node node) 
+    {
+        ArrayList<Integer> al = new ArrayList<>();
+        Queue<Node> queue = new LinkedList<>();
+        Stack<Integer> stack = new Stack<>();
+        
+        queue.add(node);
+        
+        while(!queue.isEmpty())
+        {
+           Node curr = queue.poll();
+           stack.push(curr.data);
+           if(curr.right!=null)
+           {
+               queue.add(curr.right);
+           }
+           if(curr.left!=null)
+           {
+               queue.add(curr.left);
+           }
+        }
+        
+        while(!stack.empty())
+        {
+            al.add(stack.pop());
+        }
+        
+        return al;
+    }
+}      
