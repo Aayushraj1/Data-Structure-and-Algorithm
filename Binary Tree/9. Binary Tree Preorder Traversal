@@ -1,0 +1,24 @@
+Leetcode: https://leetcode.com/problems/binary-tree-preorder-traversal/
+
+#MY_CODE#
+
+class Solution {
+    static List<Integer> list = null;
+    public List<Integer> preorderTraversal(TreeNode root) {
+        list = new LinkedList<>();
+        preorder(root);
+        return list;
+    }
+    
+    public static void preorder(TreeNode root)
+    {
+        if(root == null)
+            return;
+    
+        list.add(root.val);
+        preorder(root.left);
+        preorder(root.right);
+        
+        return;
+    }
+}
