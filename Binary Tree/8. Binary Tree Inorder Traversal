@@ -1,0 +1,24 @@
+Leetcode: https://leetcode.com/problems/binary-tree-inorder-traversal/submissions/
+
+#MY_CODE#
+
+class Solution {
+    static List<Integer> list = null;
+    public List<Integer> inorderTraversal(TreeNode root) {
+        list = new LinkedList<>();
+        inorder(root);
+        return list;
+    }
+    
+    public static void inorder(TreeNode root)
+    {
+        if(root == null)
+            return;
+        
+        inorder(root.left);
+        list.add(root.val);
+        inorder(root.right);
+        
+        return;
+    }
+}
