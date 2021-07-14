@@ -1,0 +1,37 @@
+GFG: https://practice.geeksforgeeks.org/problems/left-view-of-binary-tree/1
+
+Left view of a Binary Tree is set of nodes visible when tree is visited from Left side
+ 
+#MY_CODE#
+ 
+class Tree
+{
+    //Function to return list containing elements of left view of binary tree.
+    ArrayList<Integer> leftView(Node root)
+    {
+        ArrayList<Integer> al = new ArrayList<>();
+        Queue<Node> queue = new LinkedList<>();
+        
+        if(root==null)
+            return al;
+        
+        queue.add(root);
+        
+        while(!queue.isEmpty())
+        {
+            int size = queue.size();
+            al.add(queue.peek().data);
+            
+            for(int i=0;i<size;i++)
+            {
+                Node curr = queue.poll();
+                if(curr.left!=null)
+                    queue.add(curr.left);
+                if(curr.right!=null)
+                    queue.add(curr.right);
+            }
+        }
+        
+        return al;
+    }
+}
