@@ -1,0 +1,43 @@
+GFG: https://practice.geeksforgeeks.org/problems/bottom-view-of-binary-tree/1#
+
+print the bottom view from left to right.
+A node is included in bottom view if it can be seen when we look at the tree from bottom.
+
+#MY_CODE#
+
+class Solution
+{
+    //Function to return a list containing the bottom view of the given tree.
+    TreeMap<Integer,Integer> tm = null;
+    TreeMap<Integer,Integer> th = null;
+    public ArrayList <Integer> bottomView(Node root)
+    {
+        ArrayList<Integer> al = new ArrayList<>();
+        tm = new TreeMap<>();
+        th = new TreeMap<>();
+        
+        traverse(root,0,0);
+        
+        for (Map.Entry<Integer,Integer> e : tm.entrySet())
+            al.add(e.getValue());
+            
+        return al;
+    }
+    
+    void traverse(Node root,int pos,int height)
+    {
+        if(root == null)
+            return;
+        
+        if(!tm.containsKey(pos) || height>=th.get(pos))
+        {
+            tm.put(pos,root.data);
+            th.put(pos,height);
+        }
+
+        traverse(root.left,pos-1,height+1);
+        traverse(root.right,pos+1,height+1);
+            
+        return;
+    }
+}
